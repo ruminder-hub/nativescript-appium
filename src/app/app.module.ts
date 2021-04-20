@@ -1,14 +1,11 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "@nativescript/angular";
-
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ItemsComponent } from "./item/items.component";
 import { ItemDetailComponent } from "./item/item-detail.component";
 import { LoginComponent } from "./login/login.component";
-import { NativeScriptMaterialTextFieldModule } from "nativescript-material-textfield/angular";
-import { NativeScriptMaterialButtonModule } from "nativescript-material-button/angular";
-
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -23,8 +20,7 @@ import { NativeScriptMaterialButtonModule } from "nativescript-material-button/a
     imports: [
         NativeScriptModule,
         AppRoutingModule,
-        NativeScriptMaterialTextFieldModule,
-        NativeScriptMaterialButtonModule,
+        NativeScriptFormsModule,
     ],
     declarations: [
         AppComponent,

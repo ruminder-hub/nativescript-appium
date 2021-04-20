@@ -34,36 +34,43 @@ describe("sample scenario", function () {
                 }
             });
         });
-        it("should find an element by text", function () {
-            return __awaiter(this, void 0, void 0, function* () {
-                const btnTap = yield driver.findElementByAutomationText("TAP");
-                yield btnTap.click();
-                const message = " taps left";
-                const lblMessage = yield driver.findElementByText(message, nativescript_dev_appium_1.SearchOptions.contains);
-                chai_1.assert.equal(yield lblMessage.text(), "41" + message);
-                // Image verification
-                // const screen = await driver.compareScreen("hello-world-41");
-                // assert.isTrue(screen);
-            });
-        });
-        it("should find an element by type", function () {
-            return __awaiter(this, void 0, void 0, function* () {
-                const btnTap = yield driver.findElementByClassName(driver.locators.button);
-                yield btnTap.click();
-                const message = " taps left";
-                const lblMessage = yield driver.findElementByText(message, nativescript_dev_appium_1.SearchOptions.contains);
-                chai_1.assert.equal(yield lblMessage.text(), "40" + message);
-            });
-        });
-        it("verify login", () => __awaiter(this, void 0, void 0, function* () {
-            let el1 = yield driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.EditText[1]");
+        // it("should find an element by text", async function () {
+        //     const btnTap = await driver.findElementByAutomationText("TAP");
+        //     await btnTap.click();
+        //     const message = " taps left";
+        //     const lblMessage = await driver.findElementByText(message, SearchOptions.contains);
+        //     assert.equal(await lblMessage.text(), "41" + message);
+        //     // Image verification
+        //     // const screen = await driver.compareScreen("hello-world-41");
+        //     // assert.isTrue(screen);
+        // });
+        // it("should find an element by type", async function () {
+        //     const btnTap = await driver.findElementByClassName(driver.locators.button);
+        //     await btnTap.click();
+        //     const message = " taps left";
+        //     const lblMessage = await driver.findElementByText(message, SearchOptions.contains);
+        //     assert.equal(await lblMessage.text(), "40" + message);
+        // });
+        it("Login Success testing", () => __awaiter(this, void 0, void 0, function* () {
+            let el1 = yield driver.findElementByAutomationText("username");
             yield el1.sendKeys("rumi");
-            let el2 = yield driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.EditText[2]");
-            yield el2.sendKeys("rumi");
-            let el3 = yield driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.Button");
+            let el2 = yield driver.findElementByAutomationText("password");
+            yield el2.sendKeys("hello123");
+            let el3 = yield driver.findElementByText("Sign in", nativescript_dev_appium_1.SearchOptions.exact);
             yield el3.click();
-            let el4 = yield driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout");
-            chai_1.assert.isTrue(el4.isDisplayed());
+            let message = yield driver.findElementByAutomationTextIfExists("errorMessage");
+            chai_1.assert.isUndefined(message);
+        }));
+        it("Login Failure testing", () => __awaiter(this, void 0, void 0, function* () {
+            yield driver.resetApp();
+            let el1 = yield driver.findElementByAutomationText("username");
+            yield el1.sendKeys("rumi");
+            let el2 = yield driver.findElementByAutomationText("password");
+            yield el2.sendKeys("hello");
+            let el3 = yield driver.findElementByText("Sign in", nativescript_dev_appium_1.SearchOptions.exact);
+            yield el3.click();
+            let message = yield driver.findElementByAutomationTextIfExists("errorMessage");
+            chai_1.assert(message.text(), "Enter correct credentials");
         }));
     });
 });

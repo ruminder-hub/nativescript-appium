@@ -52,7 +52,7 @@
         "appActivity": "com.tns.NativeScriptActivity",  
         "newCommandTimeout": 720,
         "noReset": false,
-        "fullReset": true,
+        "fullReset": false,
         "app": ""
     },
     "android26": {

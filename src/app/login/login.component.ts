@@ -1,35 +1,43 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
+import { type, userInfo } from "os";
 
 class User {
     username: string;
     password: string;
 
     constructor() {
-        this.username ="";
-        this.password="";
+        this.username = "";
+        this.password = "";
     }
 }
 
 @Component({
-    templateUrl: "./login.component.html"
+    selector: "gr-login",
+    moduleId: module.id,
+    templateUrl: "./login.component.html",
+    styleUrls: ["./login.component.css"],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
     user: User;
-    
-    constructor() {
-        console.log(".................... Login page on init.............................");
-        
-    }
+    errorMessage: string;
 
-    ngOnInit() {
-        this.user = new User();
+    constructor() {
+        this.user = new User();  
+        this.errorMessage = null;   
     }
 
     login() {
-        if (this.user.username == "" || this.user.password == "") {
-            alert("Enter username and password");
+        this.errorMessage = null;
+        console.log("Entered user name is " + this.user.username + " and password is " + this.user.password);
+        console.log("Typeof entered userbane is " + typeof(this.user.username));
+        if (this.user.username === "" || this.user.password === "") {
+            this.errorMessage = "Kindly enter username and password";
             return;
+        } else if (this.user.username === "rumi" && this.user.password === "hello123") {
+            alert("Verified successfully");
+        } else {
+            this.errorMessage = "Enter correct credentials";
         }
-        alert("VErifying the credentials");
+
     }
 }

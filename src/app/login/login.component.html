@@ -1,7 +1,16 @@
-<ActionBar title="Rumi"></ActionBar>
+<FlexboxLayout>
+    <StackLayout class="form" >
+        <TextField hint="Enter Username" keyboardType="email"
+            autocorrect="false" 
+            class="input input-border" [(ngModel)]="user.username" automationText="username">
+        </TextField>
+        <TextField hint="Password" secure="true" class="input input-border" [(ngModel)]="user.password" automationText="password">
+        </TextField>
+        <Label 
+            class="error-message" [text] = "errorMessage" automationText="errorMessage" [visibility]="errorMessage != null ? 'visible' : 'hidden'"></Label>
+        <Button text="Sign in"
+            class="btn btn-primary" (tap)="login()" id="loginButton"></Button>
+        <Button text='Sign up' id="signUpButton"></Button>
+    </StackLayout>
 
-<StackLayout backgroundColor="#FFF">
-    <TextField  [text]="user.username" hint="username"></TextField>
-    <TextField  [text]="user.password" hint="password"></TextField>
-    <Button text="Login" (tap)="login()"></Button>
-</StackLayout>
+</FlexboxLayout>
